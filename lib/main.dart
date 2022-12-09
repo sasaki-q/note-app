@@ -1,3 +1,4 @@
+import 'package:demo/features/auth/presentation/screens/auth_screen.dart';
 import 'package:demo/firebase_options.dart';
 import 'package:demo/provider.dart';
 import 'package:demo/utils/theme/theme.dart';
@@ -46,15 +47,10 @@ class App extends ConsumerWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: Styles.themeData(isDarkTheme: isDarkTheme, context: context),
-          home: Scaffold(
-            appBar: AppBar(
-              title: const Text("hello world"),
-              leading: IconButton(
-                icon: const Icon(Icons.catching_pokemon_outlined),
-                onPressed: () => ref.read(themeProvider.notifier).changeTheme(),
-              ),
-            ),
-          ),
+          home: const AuthScreen(),
+          routes: const {
+            // OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
+          },
         );
       },
     );

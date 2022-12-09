@@ -16,9 +16,9 @@ class Styles {
                 ),
             cardColor: const Color(0xFF0a0d2c),
             canvasColor: Colors.black,
-            buttonTheme: Theme.of(context)
-                .buttonTheme
-                .copyWith(colorScheme: const ColorScheme.dark()),
+            buttonTheme: Theme.of(context).buttonTheme.copyWith(
+                  colorScheme: const ColorScheme.dark(),
+                ),
           )
         // light
         : ThemeData(
@@ -30,9 +30,17 @@ class Styles {
                 ),
             cardColor: const Color(0xFFF2FDFD),
             canvasColor: Colors.grey[50],
-            buttonTheme: Theme.of(context)
-                .buttonTheme
-                .copyWith(colorScheme: const ColorScheme.light()),
+            buttonTheme: Theme.of(context).buttonTheme.copyWith(
+                  colorScheme: const ColorScheme.light(),
+                ),
+            inputDecorationTheme: const InputDecorationTheme(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 1.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey, width: 1.0),
+              ),
+            ),
           );
   }
 }
