@@ -1,0 +1,38 @@
+name: demo
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  cupertino_icons: ^1.0.2
+  # state management
+  flutter_riverpod: ^2.0.2
+  # firebase
+  firebase_auth: ^4.2.0
+  firebase_core: ^2.4.0
+  cloud_firestore: ^4.2.0
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.7.0
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.2
+  freezed: ^2.3.2
+  json_serializable: ^6.5.4
+
+flutter:
+  uses-material-design: true
+
+  # assets:
+  #   - images/a_dot_burr.jpeg
