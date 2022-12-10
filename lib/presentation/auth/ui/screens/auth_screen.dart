@@ -1,8 +1,8 @@
 import 'package:demo/common_provider.dart';
 import 'package:demo/domains/user/user.dart';
-import 'package:demo/features/auth/presentation/widgets/form.dart';
-import 'package:demo/features/auth/type.dart';
-import 'package:demo/features/category/presentation/category_screen.dart';
+import 'package:demo/presentation/auth/ui/widgets/form.dart';
+import 'package:demo/presentation/auth/type.dart';
+import 'package:demo/presentation/category/ui/category_screen.dart';
 import 'package:demo/widgets/future_option_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,4 +1,4 @@
-import 'package:demo/features/auth/type.dart';
+import 'package:demo/presentation/auth/type.dart';
 import 'package:demo/repositories/auth/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

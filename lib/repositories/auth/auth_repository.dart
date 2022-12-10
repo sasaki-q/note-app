@@ -1,4 +1,4 @@
-import 'package:demo/features/auth/type.dart';
+import 'package:demo/presentation/auth/type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepository {

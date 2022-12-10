@@ -1,5 +1,5 @@
-import 'package:demo/features/auth/presentation/screens/auth_screen.dart';
-import 'package:demo/features/category/presentation/category_screen.dart';
+import 'package:demo/presentation/auth/ui/screens/auth_screen.dart';
+import 'package:demo/presentation/category/ui/category_screen.dart';
 import 'package:demo/firebase_options.dart';
 import 'package:demo/common_provider.dart';
 import 'package:demo/utils/theme/theme.dart';
