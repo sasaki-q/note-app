@@ -1,8 +1,10 @@
 import 'package:demo/features/auth/presentation/screens/auth_screen.dart';
+import 'package:demo/features/category/presentation/category_screen.dart';
 import 'package:demo/firebase_options.dart';
 import 'package:demo/provider.dart';
 import 'package:demo/utils/theme/theme.dart';
 import 'package:demo/utils/theme/theme_provider.dart';
+import 'package:demo/widgets/future_option_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,35 +39,25 @@ class App extends ConsumerWidget {
       future: _firebaseInitialization,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const InitApp(children: CircularProgressIndicator());
+          return const FutureOptionWidget(
+              children: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
-          return const InitApp(children: Text('An connection error occured'));
+          return const FutureOptionWidget(
+            children: Text('An connection error occured'),
+          );
         }
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: Styles.themeData(isDarkTheme: isDarkTheme, context: context),
           home: const AuthScreen(),
-          routes: const {
-            // OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
+          routes: {
+            CategoryScreen.path: (ctx) => const CategoryScreen(),
           },
         );
       },
-    );
-  }
-}
-
-class InitApp extends StatelessWidget {
-  const InitApp({super.key, required this.children});
-  final Widget children;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: children)),
     );
   }
 }

@@ -57,4 +57,14 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
 
     ref.read(userProvider.notifier).state = user;
   }
+
+  Future<myuser.User?> currentUser() async {
+    User? authenticatedUser = authUsecase.currentUser();
+
+    if (authenticatedUser == null) return null;
+
+    final user = await userUsecase.getUser(uid: authenticatedUser.uid);
+    ref.read(userProvider.notifier).state = user;
+    return user;
+  }
 }

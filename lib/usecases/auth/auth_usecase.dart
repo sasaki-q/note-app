@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 abstract class AuthUsecase {
+  User? currentUser();
   Future<UserCredential?> signup({required CredentialType credential});
   Future<UserCredential?> signin({required CredentialType credential});
 }
@@ -11,6 +12,9 @@ abstract class AuthUsecase {
 class AuthUsecaseImpl implements AuthUsecase {
   const AuthUsecaseImpl({required this.repository});
   final AuthRepository repository;
+
+  @override
+  User? currentUser() => repository.currentUser();
 
   @override
   Future<UserCredential?> signup({required CredentialType credential}) async {

@@ -2,6 +2,7 @@ import 'package:demo/features/auth/type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepository {
+  User? currentUser();
   Future<UserCredential> signup({required CredentialType credential});
   Future<UserCredential> signin({required CredentialType credential});
 }
@@ -9,6 +10,9 @@ abstract class AuthRepository {
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.authInstance});
   final FirebaseAuth authInstance;
+
+  @override
+  User? currentUser() => authInstance.currentUser;
 
   @override
   Future<UserCredential> signup({required CredentialType credential}) async {
