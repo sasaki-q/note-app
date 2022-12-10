@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 
-class PushPageWithArgumentClass<T> {
+class RouterArgument<T> {
   final BuildContext context;
   final T nextPage;
 
-  const PushPageWithArgumentClass({
+  const RouterArgument({
     required this.context,
     required this.nextPage,
   });
 }
 
 class MyRouter {
-  static void pushPageWithArgument({
-    required PushPageWithArgumentClass argument,
+  static void pushWithArgument({
+    required RouterArgument argument,
   }) =>
       Navigator.push(
         argument.context,
         MaterialPageRoute(builder: (BuildContext context) => argument.nextPage),
+      );
+
+  static void pushAndRemoveUntil({required RouterArgument argument}) =>
+      Navigator.pushAndRemoveUntil(
+        argument.context,
+        MaterialPageRoute(builder: (context) => argument.nextPage),
+        (_) => false,
       );
 }

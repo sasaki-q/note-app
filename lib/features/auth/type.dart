@@ -25,9 +25,11 @@ class FormGroup {
 }
 
 class CredentialType {
+  final BuildContext context;
   final String email, password;
 
   const CredentialType({
+    required this.context,
     required this.email,
     required this.password,
   });

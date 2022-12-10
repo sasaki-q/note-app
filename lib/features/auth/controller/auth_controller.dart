@@ -1,18 +1,13 @@
 import 'package:demo/domains/user/user.dart' as myuser;
+import 'package:demo/features/auth/presentation/screens/auth_screen.dart';
 import 'package:demo/features/auth/type.dart';
 import 'package:demo/common_provider.dart';
 import 'package:demo/usecases/auth/auth_usecase.dart';
 import 'package:demo/usecases/user/user_usecase.dart';
+import 'package:demo/utils/router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final authProvider = StateNotifierProvider<AuthNotifier, AuthStatus>(
-  (ref) => AuthNotifier(
-    ref: ref,
-    authUsecase: ref.watch(authUsecaseProvider),
-    userUsecase: ref.watch(userUsecaseProvider),
-  ),
-);
 
 class AuthNotifier extends StateNotifier<AuthStatus> {
   AuthNotifier({
@@ -45,6 +40,13 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
     );
 
     ref.read(userProvider.notifier).state = user;
+
+    MyRouter.pushAndRemoveUntil(
+      argument: RouterArgument(
+        context: credential.context,
+        nextPage: const AuthScreen(),
+      ),
+    );
   }
 
   Future<void> signin({required CredentialType credential}) async {
@@ -56,6 +58,13 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
     final user = await userUsecase.getUser(uid: authenticatedUser.uid);
 
     ref.read(userProvider.notifier).state = user;
+
+    MyRouter.pushAndRemoveUntil(
+      argument: RouterArgument(
+        context: credential.context,
+        nextPage: const AuthScreen(),
+      ),
+    );
   }
 
   Future<myuser.User?> currentUser() async {
@@ -66,5 +75,15 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
     final user = await userUsecase.getUser(uid: authenticatedUser.uid);
     ref.read(userProvider.notifier).state = user;
     return user;
+  }
+
+  Future<void> signOut({required BuildContext context}) async {
+    await authUsecase.signOut();
+    MyRouter.pushAndRemoveUntil(
+      argument: RouterArgument(
+        context: context,
+        nextPage: const AuthScreen(),
+      ),
+    );
   }
 }

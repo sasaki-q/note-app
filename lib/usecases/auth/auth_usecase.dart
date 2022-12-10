@@ -7,6 +7,7 @@ abstract class AuthUsecase {
   User? currentUser();
   Future<UserCredential?> signup({required CredentialType credential});
   Future<UserCredential?> signin({required CredentialType credential});
+  Future<void> signOut();
 }
 
 class AuthUsecaseImpl implements AuthUsecase {
@@ -33,6 +34,15 @@ class AuthUsecaseImpl implements AuthUsecase {
     } catch (err) {
       debugPrint("DEBUG signin error message === $err");
       return null;
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await repository.signOut();
+    } catch (err) {
+      debugPrint("DEBUG error message ==== $err");
     }
   }
 }

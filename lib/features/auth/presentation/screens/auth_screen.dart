@@ -1,5 +1,5 @@
+import 'package:demo/common_provider.dart';
 import 'package:demo/domains/user/user.dart';
-import 'package:demo/features/auth/controller/auth_controller.dart';
 import 'package:demo/features/auth/presentation/widgets/form.dart';
 import 'package:demo/features/auth/type.dart';
 import 'package:demo/features/category/presentation/category_screen.dart';

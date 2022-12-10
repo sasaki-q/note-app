@@ -88,6 +88,7 @@ class AuthFormState extends State<AuthForm> {
 
                     await widget.function(
                       credential: CredentialType(
+                        context: context,
                         email: emailFormGroup.controller.text,
                         password: passwordFormGroup.controller.text,
                       ),
@@ -97,15 +98,16 @@ class AuthFormState extends State<AuthForm> {
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: TextButton(
-                    child: Text(
-                      widget.authStatus.value == "signup"
-                          ? "login?"
-                          : "create account?",
-                    ),
-                    onPressed: () => widget.switchFunction(),
-                  )),
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: TextButton(
+                  child: Text(
+                    widget.authStatus.value == "signup"
+                        ? "login?"
+                        : "create account?",
+                  ),
+                  onPressed: () => widget.switchFunction(),
+                ),
+              ),
             ],
           ),
         ),

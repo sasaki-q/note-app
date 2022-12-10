@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/features/auth/controller/auth_controller.dart';
+import 'package:demo/features/auth/type.dart';
 import 'package:demo/repositories/auth/auth_repository.dart';
 import 'package:demo/repositories/category/category_repository.dart';
 import 'package:demo/repositories/user/user_repository.dart';
@@ -41,6 +43,14 @@ final firebaseProvider = Provider<FirebaseInstanceClass>(
       memoFirestore: store.collection("memo"),
     );
   },
+);
+
+final authProvider = StateNotifierProvider<AuthNotifier, AuthStatus>(
+  (ref) => AuthNotifier(
+    ref: ref,
+    authUsecase: ref.watch(authUsecaseProvider),
+    userUsecase: ref.watch(userUsecaseProvider),
+  ),
 );
 
 // usecase provider

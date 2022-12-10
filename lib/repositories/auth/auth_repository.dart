@@ -5,6 +5,7 @@ abstract class AuthRepository {
   User? currentUser();
   Future<UserCredential> signup({required CredentialType credential});
   Future<UserCredential> signin({required CredentialType credential});
+  Future<void> signOut();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -29,4 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
       password: credential.password,
     );
   }
+
+  @override
+  Future<void> signOut() async => await authInstance.signOut();
 }
