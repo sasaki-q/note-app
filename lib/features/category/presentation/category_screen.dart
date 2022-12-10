@@ -1,5 +1,7 @@
 import 'package:demo/domains/category/category.dart';
 import 'package:demo/features/category/provider.dart';
+import 'package:demo/features/memo/presentation/screens/memo_screen.dart';
+import 'package:demo/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,7 +23,6 @@ class CategoryScreen extends ConsumerWidget {
           loading: () => const CircularProgressIndicator(),
           error: (err, stack) => Text('Fetch Error: $err'),
           data: (categories) {
-            debugPrint("DEBUG success fetch data === $categories");
             return ListView.builder(
               itemCount: categories.length,
               itemBuilder: ((context, i) {
@@ -32,7 +33,12 @@ class CategoryScreen extends ConsumerWidget {
                   subtitle: Text(currentCategory.id),
                   trailing: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_outlined),
-                    onPressed: () => debugPrint("on press"),
+                    onPressed: () => MyRouter.pushPageWithArgument(
+                      argument: PushPageWithArgumentClass(
+                        context: context,
+                        nextPage: MemoScreen(selectedCategory: currentCategory),
+                      ),
+                    ),
                   ),
                 );
               }),

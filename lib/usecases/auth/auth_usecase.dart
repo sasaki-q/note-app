@@ -21,7 +21,7 @@ class AuthUsecaseImpl implements AuthUsecase {
     try {
       return await repository.signup(credential: credential);
     } catch (err) {
-      debugPrint("DEBUG error message === $err");
+      debugPrint("DEBUG signup error message === $err");
       return null;
     }
   }
@@ -31,7 +31,7 @@ class AuthUsecaseImpl implements AuthUsecase {
     try {
       return await repository.signin(credential: credential);
     } catch (err) {
-      debugPrint("DEBUG error message === $err");
+      debugPrint("DEBUG signin error message === $err");
       return null;
     }
   }
