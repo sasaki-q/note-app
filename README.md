@@ -1,8 +1,8 @@
 ## 設計
 １, clean architectureを採用  
 ２, 主にUIに関わるpresentation層はfeature単位でディレクトリを切る  
-　　 → featureの中にui, controllerディレクトリを作成
-      controllerはview model的な位置付け
+　　 → featureの中にui, controllerディレクトリを作成  
+      controllerはview model的な位置付け  
 ３, 簡易的なアプリケーションのため、認証、データストア、ストレージにfirebaseを採用  
 ４, 状態管理にriverpodを採用  
 ５, データの不変性を担保するためにfreezedを採用  
