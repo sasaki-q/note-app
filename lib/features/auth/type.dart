@@ -25,8 +25,7 @@ class FormGroup {
 }
 
 class CredentialType {
-  final String email;
-  final String password;
+  final String email, password;
 
   const CredentialType({
     required this.email,
