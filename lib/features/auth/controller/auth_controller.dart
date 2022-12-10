@@ -1,6 +1,6 @@
 import 'package:demo/domains/user/user.dart' as myuser;
 import 'package:demo/features/auth/type.dart';
-import 'package:demo/provider.dart';
+import 'package:demo/common_provider.dart';
 import 'package:demo/usecases/auth/auth_usecase.dart';
 import 'package:demo/usecases/user/user_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';

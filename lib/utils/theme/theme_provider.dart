@@ -1,4 +1,4 @@
-import 'package:demo/provider.dart';
+import 'package:demo/common_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

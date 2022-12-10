@@ -1,7 +1,7 @@
 import 'package:demo/features/auth/presentation/screens/auth_screen.dart';
 import 'package:demo/features/category/presentation/category_screen.dart';
 import 'package:demo/firebase_options.dart';
-import 'package:demo/provider.dart';
+import 'package:demo/common_provider.dart';
 import 'package:demo/utils/theme/theme.dart';
 import 'package:demo/utils/theme/theme_provider.dart';
 import 'package:demo/widgets/future_option_widget.dart';

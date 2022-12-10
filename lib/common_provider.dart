@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/repositories/auth/auth_repository.dart';
+import 'package:demo/repositories/category/category_repository.dart';
 import 'package:demo/repositories/user/user_repository.dart';
 import 'package:demo/usecases/auth/auth_usecase.dart';
+import 'package:demo/usecases/category/category_usecase.dart';
 import 'package:demo/usecases/user/user_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,6 +52,12 @@ final userUsecaseProvider = Provider<UserUsecase>(
   (ref) => UserUsecaseImpl(repository: ref.watch(userRepositoryProvider)),
 );
 
+final categoryUsecaseProvider = Provider<CategoryUsecase>(
+  (ref) => CategoryUsecaseImpl(
+    repository: ref.watch(categoryRepositoryProvider),
+  ),
+);
+
 // repository provider
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
@@ -60,5 +68,11 @@ final authRepositoryProvider = Provider<AuthRepository>(
 final userRepositoryProvider = Provider<UserRepository>(
   (ref) => UserRepositoryImpl(
     userFirestore: ref.watch(firebaseProvider).userFirestore,
+  ),
+);
+
+final categoryRepositoryProvider = Provider<CategoryRepository>(
+  (ref) => CategoryRepositoryImpl(
+    categoryFirestore: ref.watch(firebaseProvider).categoryFirestore,
   ),
 );
