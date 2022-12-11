@@ -20,6 +20,7 @@ Memo _$MemoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Memo {
+  String get id => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $MemoCopyWith<$Res> {
       _$MemoCopyWithImpl<$Res, Memo>;
   @useResult
   $Res call(
-      {String uid,
+      {String id,
+      String uid,
       String title,
       String contents,
       @JsonKey(name: 'category_id') String categoryId});
@@ -56,12 +58,17 @@ class _$MemoCopyWithImpl<$Res, $Val extends Memo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? uid = null,
     Object? title = null,
     Object? contents = null,
     Object? categoryId = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -89,7 +96,8 @@ abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String uid,
+      {String id,
+      String uid,
       String title,
       String contents,
       @JsonKey(name: 'category_id') String categoryId});
@@ -104,12 +112,17 @@ class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? uid = null,
     Object? title = null,
     Object? contents = null,
     Object? categoryId = null,
   }) {
     return _then(_$_Memo(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -134,13 +147,16 @@ class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
 @JsonSerializable()
 class _$_Memo implements _Memo {
   const _$_Memo(
-      {required this.uid,
+      {required this.id,
+      required this.uid,
       required this.title,
       required this.contents,
       @JsonKey(name: 'category_id') required this.categoryId});
 
   factory _$_Memo.fromJson(Map<String, dynamic> json) => _$$_MemoFromJson(json);
 
+  @override
+  final String id;
   @override
   final String uid;
   @override
@@ -153,7 +169,7 @@ class _$_Memo implements _Memo {
 
   @override
   String toString() {
-    return 'Memo(uid: $uid, title: $title, contents: $contents, categoryId: $categoryId)';
+    return 'Memo(id: $id, uid: $uid, title: $title, contents: $contents, categoryId: $categoryId)';
   }
 
   @override
@@ -161,6 +177,7 @@ class _$_Memo implements _Memo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Memo &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.contents, contents) ||
@@ -172,7 +189,7 @@ class _$_Memo implements _Memo {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, uid, title, contents, categoryId);
+      Object.hash(runtimeType, id, uid, title, contents, categoryId);
 
   @JsonKey(ignore: true)
   @override
@@ -190,7 +207,8 @@ class _$_Memo implements _Memo {
 
 abstract class _Memo implements Memo {
   const factory _Memo(
-          {required final String uid,
+          {required final String id,
+          required final String uid,
           required final String title,
           required final String contents,
           @JsonKey(name: 'category_id') required final String categoryId}) =
@@ -198,6 +216,8 @@ abstract class _Memo implements Memo {
 
   factory _Memo.fromJson(Map<String, dynamic> json) = _$_Memo.fromJson;
 
+  @override
+  String get id;
   @override
   String get uid;
   @override

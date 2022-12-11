@@ -40,6 +40,9 @@ class Styles {
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey, width: 1.0),
               ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 1.0),
+              ),
             ),
             floatingActionButtonTheme: const FloatingActionButtonThemeData(
               backgroundColor: Colors.blue,

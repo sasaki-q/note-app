@@ -1,71 +1,84 @@
+import 'package:demo/domains/memo/memo.dart';
+import 'package:uuid/uuid.dart';
 import 'package:demo/presentation/auth/type.dart';
+import 'package:demo/presentation/memo/type.dart';
 import 'package:demo/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class MemoForm extends StatefulWidget {
-  const MemoForm({super.key});
+  const MemoForm({super.key, required this.props});
+  final MemoFormWidgetProps props;
   @override
   MemoFormState createState() => MemoFormState();
 }
 
 class MemoFormState extends State<MemoForm> {
   final _formKey = GlobalKey<FormState>();
-  final emailFormGroup = FormGroup(
+  final titleFormGroup = FormGroup(
     node: FocusNode(),
     controller: TextEditingController(),
   );
 
-  final passwordFormGroup = FormGroup(
+  final contentsFormGroup = FormGroup(
     node: FocusNode(),
     controller: TextEditingController(),
   );
 
-  static String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter some text';
-    }
-
-    return emailRegExp.hasMatch(value) ? null : "Invalid email address";
-  }
-
-  static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter some text';
-    }
-
-    if (value.length < 8) {
-      return "Password must be at least 8 characters";
-    }
-
-    return RegExp("[A-Z]").hasMatch(value)
-        ? null
-        : "Please include uppercase capital";
-  }
+  static String? validateFormField(String? value) =>
+      value == null || value.isEmpty ? 'Please enter some text' : null;
 
   @override
   Widget build(BuildContext context) {
+    MemoFormWidgetProps props = widget.props;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Center(
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
-                focusNode: emailFormGroup.node,
-                controller: emailFormGroup.controller,
-                validator: (value) => validateEmail(value),
-                decoration: const InputDecoration(hintText: "test@example.com"),
+                focusNode: titleFormGroup.node,
+                controller: titleFormGroup.controller,
+                validator: (value) => validateFormField(value),
+                decoration: const InputDecoration(hintText: "title"),
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 20),
               TextFormField(
-                focusNode: passwordFormGroup.node,
-                controller: passwordFormGroup.controller,
-                validator: (value) => validatePassword(value),
-                decoration: const InputDecoration(hintText: "***********"),
-                keyboardType: TextInputType.visiblePassword,
+                focusNode: contentsFormGroup.node,
+                controller: contentsFormGroup.controller,
+                validator: (value) => validateFormField(value),
+                decoration: const InputDecoration(hintText: "contents"),
+                keyboardType: TextInputType.multiline,
+                maxLines: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data')),
+                      );
+                    }
+
+                    await widget.props.function(
+                      context: context,
+                      memo: Memo(
+                        id: const Uuid().toString(),
+                        uid: props.user.id,
+                        categoryId: props.categoryId,
+                        title: titleFormGroup.controller.text,
+                        contents: contentsFormGroup.controller.text,
+                      ),
+                    );
+                  },
+                  child: const Text("send memo"),
+                ),
               ),
             ],
           ),

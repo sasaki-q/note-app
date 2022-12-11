@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  cupertino_icons: ^1.0.2
+  uuid: ^3.0.7
   # state management
   flutter_riverpod: ^2.0.2
   # firebase

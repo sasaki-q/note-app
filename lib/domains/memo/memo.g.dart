@@ -9,6 +9,7 @@ part of 'memo.dart';
 // **************************************************************************
 
 _$_Memo _$$_MemoFromJson(Map<String, dynamic> json) => _$_Memo(
+      id: json['id'] as String,
       uid: json['uid'] as String,
       title: json['title'] as String,
       contents: json['contents'] as String,
@@ -16,6 +17,7 @@ _$_Memo _$$_MemoFromJson(Map<String, dynamic> json) => _$_Memo(
     );
 
 Map<String, dynamic> _$$_MemoToJson(_$_Memo instance) => <String, dynamic>{
+      'id': instance.id,
       'uid': instance.uid,
       'title': instance.title,
       'contents': instance.contents,

@@ -11,6 +11,13 @@ class RouterArgument<T> {
 }
 
 class MyRouter {
+  static void pop({required BuildContext context}) => Navigator.pop(context);
+
+  static void popAndPush({required RouterArgument argument}) {
+    Navigator.pop(argument.context);
+    MyRouter.pushWithArgument(argument: argument);
+  }
+
   static void pushWithArgument({
     required RouterArgument argument,
   }) =>

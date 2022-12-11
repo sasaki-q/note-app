@@ -47,7 +47,7 @@ class CategoryScreen extends ConsumerWidget {
                     onPressed: () => MyRouter.pushWithArgument(
                       argument: RouterArgument(
                         context: context,
-                        nextPage: MemoListScreen(category: currentCategory),
+                        nextPage: InitMemoListScreen(category: currentCategory),
                       ),
                     ),
                   ),

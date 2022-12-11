@@ -4,12 +4,13 @@ import 'package:demo/domains/memo/memo.dart';
 import 'package:demo/presentation/auth/controller/auth_controller.dart';
 import 'package:demo/presentation/memo/controller/memo_controller.dart';
 import 'package:demo/presentation/memo/ui/screens/memo_screen.dart';
+import 'package:demo/presentation/memo/ui/widgets/list.dart';
 import 'package:demo/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MemoListScreen extends ConsumerWidget {
-  const MemoListScreen({
+class InitMemoListScreen extends ConsumerWidget {
+  const InitMemoListScreen({
     super.key,
     required this.category,
   });
@@ -17,10 +18,9 @@ class MemoListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AuthNotifier notifier = ref.watch(authProvider.notifier);
-    final MemoController controller = ref.watch(memoProvider.notifier);
-    Future<List<Memo>> memoList =
-        controller.getMemoList(categoryId: category.id);
+    AuthNotifier notifier = ref.watch(authProvider.notifier);
+    Future<List<Memo>> asyncMemoList =
+        ref.watch(memoProvider.notifier).getMemoList(categoryId: category.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -38,9 +38,9 @@ class MemoListScreen extends ConsumerWidget {
       body: Align(
         alignment: Alignment.center,
         child: FutureBuilder(
-          future: memoList,
+          future: asyncMemoList,
           builder: (context, snapshot) {
-            List<Memo>? memoList = snapshot.data;
+            List<Memo>? tmp = snapshot.data;
 
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
@@ -50,31 +50,15 @@ class MemoListScreen extends ConsumerWidget {
               return const Text('An connection error occured');
             }
 
-            if (memoList == null || memoList.isEmpty) {
+            if (tmp == null || tmp.isEmpty) {
               return const Text(
                 "This category is empty \n Let's post memo on this category",
               );
             }
 
-            return ListView.builder(
-              itemCount: memoList.length,
-              itemBuilder: (context, index) {
-                final Memo currentMemo = memoList[index];
-
-                return ListTile(
-                  title: Text(currentMemo.title),
-                  subtitle: Text(
-                    currentMemo.contents.length > 10
-                        ? currentMemo.contents.substring(0, 9)
-                        : currentMemo.contents,
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit_outlined),
-                    onPressed: () {},
-                  ),
-                );
-              },
-            );
+            return snapshot.connectionState == ConnectionState.done
+                ? const MemoList()
+                : const SizedBox();
           },
         ),
       ),
@@ -83,7 +67,7 @@ class MemoListScreen extends ConsumerWidget {
         onPressed: () => MyRouter.pushWithArgument(
           argument: RouterArgument(
             context: context,
-            nextPage: const MemoScreen(memo: null),
+            nextPage: MemoScreen(memo: null, categoryId: category.id),
           ),
         ),
       ),
