@@ -2,7 +2,7 @@ import 'package:demo/common_provider.dart';
 import 'package:demo/domains/category/category.dart';
 import 'package:demo/presentation/auth/controller/auth_controller.dart';
 import 'package:demo/presentation/category/provider.dart';
-import 'package:demo/presentation/memo/ui/screens/memo_screen.dart';
+import 'package:demo/presentation/memo/ui/screens/memo_list_screen.dart';
 import 'package:demo/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,7 +47,7 @@ class CategoryScreen extends ConsumerWidget {
                     onPressed: () => MyRouter.pushWithArgument(
                       argument: RouterArgument(
                         context: context,
-                        nextPage: MemoScreen(selectedCategory: currentCategory),
+                        nextPage: MemoListScreen(category: currentCategory),
                       ),
                     ),
                   ),

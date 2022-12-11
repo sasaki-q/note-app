@@ -39,18 +39,15 @@ class AuthScreen extends ConsumerWidget {
               centerTitle: true,
               title: const Text("Auth Screen"),
             ),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AuthForm(
-                  authStatus: authStatus,
-                  function: authStatus == AuthStatus.signin
-                      ? authNotifier.signin
-                      : authNotifier.signup,
-                  switchFunction: authNotifier.switchMode,
-                )
-              ],
+            body: Align(
+              alignment: Alignment.center,
+              child: AuthForm(
+                authStatus: authStatus,
+                function: authStatus == AuthStatus.signin
+                    ? authNotifier.signin
+                    : authNotifier.signup,
+                switchFunction: authNotifier.switchMode,
+              ),
             ),
           );
         }

@@ -3,9 +3,11 @@ import 'package:demo/presentation/auth/controller/auth_controller.dart';
 import 'package:demo/presentation/auth/type.dart';
 import 'package:demo/repositories/auth/auth_repository.dart';
 import 'package:demo/repositories/category/category_repository.dart';
+import 'package:demo/repositories/memo/memo_repository.dart';
 import 'package:demo/repositories/user/user_repository.dart';
 import 'package:demo/usecases/auth/auth_usecase.dart';
 import 'package:demo/usecases/category/category_usecase.dart';
+import 'package:demo/usecases/memo/memo_usecase.dart';
 import 'package:demo/usecases/user/user_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,6 +70,12 @@ final categoryUsecaseProvider = Provider<CategoryUsecase>(
   ),
 );
 
+final memoUsecaseProvider = Provider<MemoUsecase>(
+  (ref) => MemoUsecaseImpl(
+    repository: ref.watch(memoRepositoryProvider),
+  ),
+);
+
 // repository provider
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
@@ -84,5 +92,11 @@ final userRepositoryProvider = Provider<UserRepository>(
 final categoryRepositoryProvider = Provider<CategoryRepository>(
   (ref) => CategoryRepositoryImpl(
     categoryFirestore: ref.watch(firebaseProvider).categoryFirestore,
+  ),
+);
+
+final memoRepositoryProvider = Provider<MemoRepository>(
+  (ref) => MemoRepositoryImpl(
+    memoFirestore: ref.watch(firebaseProvider).memoFirestore,
   ),
 );
