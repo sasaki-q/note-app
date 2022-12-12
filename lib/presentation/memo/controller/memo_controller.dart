@@ -27,6 +27,20 @@ class MemoController extends StateNotifier<List<Memo>> {
     Memo createdMemo = await memoUsecase.writeMemo(memo: memo);
     MyRouter.pop(context: context);
 
-    state = [createdMemo, ...state];
+    state = state.isEmpty ? List.of([createdMemo]) : [createdMemo, ...state];
+  }
+
+  Future<void> editMemo({
+    required BuildContext context,
+    required Memo memo,
+  }) async {
+    await memoUsecase.editMemo(memo: memo);
+    MyRouter.pop(context: context);
+
+    int index = state.indexWhere((e) => e.id == memo.id);
+    List<Memo> copiedState = List.of(state);
+    copiedState[index] = memo;
+
+    state = copiedState;
   }
 }

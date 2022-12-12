@@ -4,6 +4,7 @@ import 'package:demo/domains/memo/memo.dart';
 abstract class MemoRepository {
   Future<List<Memo>> getMemoList({required String categoryId});
   Future<void> writeMemo({required Memo memo});
+  Future<void> editMemo({required Memo memo});
 }
 
 class MemoRepositoryImpl implements MemoRepository {
@@ -23,12 +24,20 @@ class MemoRepositoryImpl implements MemoRepository {
 
   @override
   Future<void> writeMemo({required Memo memo}) async {
-    await memoFirestore.add({
+    await memoFirestore.doc(memo.id.toString()).set({
       "id": memo.id,
       "uid": memo.uid,
       "title": memo.title,
       "contents": memo.contents,
       "category_id": memo.categoryId,
+    });
+  }
+
+  @override
+  Future<void> editMemo({required Memo memo}) async {
+    await memoFirestore.doc(memo.id).update({
+      "title": memo.title,
+      "contents": memo.contents,
     });
   }
 }

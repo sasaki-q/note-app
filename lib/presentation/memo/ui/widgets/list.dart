@@ -1,5 +1,7 @@
 import 'package:demo/domains/memo/memo.dart';
 import 'package:demo/presentation/memo/controller/memo_controller.dart';
+import 'package:demo/presentation/memo/ui/screens/memo_screen.dart';
+import 'package:demo/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,7 +26,15 @@ class MemoList extends ConsumerWidget {
           ),
           trailing: IconButton(
             icon: const Icon(Icons.edit_outlined),
-            onPressed: () {},
+            onPressed: () => MyRouter.pushWithArgument(
+              argument: RouterArgument(
+                context: context,
+                nextPage: MemoScreen(
+                  memo: currentMemo,
+                  categoryId: currentMemo.categoryId,
+                ),
+              ),
+            ),
           ),
         );
       },

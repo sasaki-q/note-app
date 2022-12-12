@@ -30,6 +30,14 @@ class MemoFormState extends State<MemoForm> {
   @override
   Widget build(BuildContext context) {
     MemoFormWidgetProps props = widget.props;
+    Memo? tmpMemo = props.memo;
+    String memoId = const Uuid().v1();
+
+    if (tmpMemo != null) {
+      memoId = tmpMemo.id;
+      titleFormGroup.controller.text = tmpMemo.title;
+      contentsFormGroup.controller.text = tmpMemo.contents;
+    }
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
@@ -69,7 +77,7 @@ class MemoFormState extends State<MemoForm> {
                     await widget.props.function(
                       context: context,
                       memo: Memo(
-                        id: const Uuid().toString(),
+                        id: memoId,
                         uid: props.user.id,
                         categoryId: props.categoryId,
                         title: titleFormGroup.controller.text,
@@ -77,7 +85,7 @@ class MemoFormState extends State<MemoForm> {
                       ),
                     );
                   },
-                  child: const Text("send memo"),
+                  child: Text(tmpMemo == null ? "send memo" : "edit memo"),
                 ),
               ),
             ],

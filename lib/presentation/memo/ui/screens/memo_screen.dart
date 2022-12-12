@@ -14,8 +14,10 @@ class MemoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final User? user = ref.read(userProvider);
-    final MemoController controller = ref.read(memoProvider.notifier);
+    User? user = ref.read(userProvider);
+    MemoController controller = ref.read(memoProvider.notifier);
+    WriteMemoFunctionType function =
+        memo == null ? controller.writeMemo : controller.editMemo;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +32,8 @@ class MemoScreen extends ConsumerWidget {
           props: MemoFormWidgetProps(
             user: user!,
             categoryId: categoryId,
-            function: controller.writeMemo,
+            function: function,
+            memo: memo,
           ),
         ),
       ),

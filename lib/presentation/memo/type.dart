@@ -11,10 +11,12 @@ class MemoFormWidgetProps {
   final String categoryId;
   final User user;
   final WriteMemoFunctionType function;
+  final Memo? memo;
 
   const MemoFormWidgetProps({
     required this.categoryId,
     required this.user,
     required this.function,
+    required this.memo,
   });
 }
