@@ -12,6 +12,12 @@ class MemoList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final memoList = ref.watch(memoProvider);
 
+    if (memoList.isEmpty) {
+      return const Text(
+        "This category's memo is empty. \n Let's post memo on this category.",
+      );
+    }
+
     return ListView.builder(
       itemCount: memoList.length,
       itemBuilder: (context, index) {

@@ -40,8 +40,6 @@ class InitMemoListScreen extends ConsumerWidget {
         child: FutureBuilder(
           future: asyncMemoList,
           builder: (context, snapshot) {
-            List<Memo>? tmp = snapshot.data;
-
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             }
@@ -50,10 +48,8 @@ class InitMemoListScreen extends ConsumerWidget {
               return const Text('An connection error occured');
             }
 
-            if (tmp == null || tmp.isEmpty) {
-              return const Text(
-                "This category is empty \n Let's post memo on this category",
-              );
+            if (snapshot.data == null) {
+              return const Text("Something went wrong, can't get data");
             }
 
             return snapshot.connectionState == ConnectionState.done
