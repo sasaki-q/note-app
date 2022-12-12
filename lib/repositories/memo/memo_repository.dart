@@ -5,6 +5,7 @@ abstract class MemoRepository {
   Future<List<Memo>> getMemoList({required String categoryId});
   Future<void> writeMemo({required Memo memo});
   Future<void> editMemo({required Memo memo});
+  Future<void> deleteMemo({required String memoId});
 }
 
 class MemoRepositoryImpl implements MemoRepository {
@@ -40,4 +41,8 @@ class MemoRepositoryImpl implements MemoRepository {
       "contents": memo.contents,
     });
   }
+
+  @override
+  Future<void> deleteMemo({required String memoId}) async =>
+      await memoFirestore.doc(memoId).delete();
 }

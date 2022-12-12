@@ -53,7 +53,9 @@ class InitMemoListScreen extends ConsumerWidget {
             }
 
             return snapshot.connectionState == ConnectionState.done
-                ? const MemoList()
+                ? MemoList(
+                    deleteFuntion: ref.watch(memoProvider.notifier).deleteMemo,
+                  )
                 : const SizedBox();
           },
         ),

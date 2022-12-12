@@ -6,6 +6,7 @@ abstract class MemoUsecase {
   Future<List<Memo>> getMemoList({required String categoryId});
   Future<Memo> writeMemo({required Memo memo});
   Future<Memo> editMemo({required Memo memo});
+  Future<void> deleteMemo({required String memoId});
 }
 
 class MemoUsecaseImpl implements MemoUsecase {
@@ -41,6 +42,15 @@ class MemoUsecaseImpl implements MemoUsecase {
     } catch (err) {
       debugPrint("DEBUG edit memo error message === $err");
       return memo;
+    }
+  }
+
+  @override
+  Future<void> deleteMemo({required String memoId}) async {
+    try {
+      await repository.deleteMemo(memoId: memoId);
+    } catch (err) {
+      debugPrint("DEBUG delete memo error message === $err");
     }
   }
 }

@@ -43,4 +43,16 @@ class MemoController extends StateNotifier<List<Memo>> {
 
     state = copiedState;
   }
+
+  Future<void> deleteMemo({
+    required BuildContext context,
+    required Memo memo,
+  }) async {
+    await memoUsecase.deleteMemo(memoId: memo.id);
+
+    List<Memo> copiedState = List.of(state);
+    copiedState.remove(memo);
+
+    state = copiedState;
+  }
 }
